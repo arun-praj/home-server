@@ -5,7 +5,7 @@ import handlebar from 'handlebars'
 
 let defaultClient = sib.ApiClient.instance
 let apiKey = defaultClient.authentications['api-key']
-apiKey.apiKey = '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'
+apiKey.apiKey = process.env.APIKEY
 const tranEmailAPI = new sib.TransactionalEmailsApi()
 
 const readFile = promisify(fs.readFile);

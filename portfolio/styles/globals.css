@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+   font-family: 'ia quattro';
+   src: url('../public/fonts/iAWriterQuattroV.ttf');
+}
+* {
+   list-style-type: none;
+}
+@layer base {
+   :root {
+      --theme: 'dark';
+      --color-text: #b0b0b0;
+      --color-text-secondary: #dbdada;
+      --color-background: #0f0d0c;
+      --color-nav-background: #00000063;
+      --color-muted: #2c2d2dbb;
+      --color-heading-primary: #fff;
+      --color-heading-secondary: #50fa7b;
+      --color-link-posts: #d63369;
+      --sc-bg: #111;
+      --sc-divider-light: hsla(0, 0%, 78%, 0.12);
+      --sc-divider-dark: hsla(0, 0%, 78%, 0.48);
+      --syntax-background: #161616;
+      --syntax-comment: grey;
+      --syntax-text: #ccc;
+      --syntax-operator: #ececec;
+      --syntax-string: #a6a6a6;
+      --syntax-number: #999;
+      --syntax-primary: #acacac;
+      --syntax-keyword: #e0e0e0;
+      --syntax-html-tag: #adadad;
+      --syntax-boolean: #ccc;
+      --tw-bg-opacity: 1;
+   }
+}
+
+@layer components {
+   .dark {
+      background-color: var(--color-background);
+      color: var(--color-text);
+      font-weight: 400;
+   }
+   .link-btn {
+      height: max-content;
+      border-radius: 0.125rem;
+      font-weight: 500;
+      transition-property: background-color, border-color, color, fill,
+         stroke;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      background-color: rgba(41, 37, 36, var(--tw-bg-opacity));
+   }
+}
+h3 {
+   --tw-text-opacity: 1;
+   color: rgba(231, 229, 228, var(--tw-text-opacity));
+}
+a {
+   cursor: pointer;
+   transition-property: background-color, border-color, color, fill, stroke;
+   transition-duration: 0.15s;
+   transition-timing-function: linear;
+}
+p {
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+}
+p:empty:not(:focus)::before {
+   content: attr(data-placeholder);
+   opacity: 0.3;
+}

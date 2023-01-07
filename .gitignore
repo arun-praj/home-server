@@ -1,0 +1,13 @@
+**/config
+*/data
+*/downloads
+*/passwd
+.env
+**/node_modules
+.next
+**/.swc/
+**/database
+**/storage
+**/cache
+**/.github/
+**/emails.js

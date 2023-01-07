@@ -1,0 +1,19 @@
+version: "3.5"
+services:
+  wireshark:
+    image: lscr.io/linuxserver/wireshark:latest
+    container_name: wireshark
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined 
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Nepal
+    volumes:
+      - ./config:/config
+    ports:
+      - 9005:3000 #optional
+    restart: unless-stopped

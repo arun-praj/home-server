@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  jellyfin:
+    image: linuxserver/jellyfin
+    container_name: jellyfin
+    #user: 1001:1001
+    network_mode: 'bridge'
+    ports:
+      - 8096:8096
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - ../../backups/media/Movies/:/media:ro
+      - ../../backups/download:/media/downloads:ro
+    restart: 'unless-stopped'
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://192.168.1.111:9002

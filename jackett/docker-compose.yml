@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Nepal
+      - AUTO_UPDATE=true #optional
+      # - RUN_OPTS=<run options here> #optional
+    volumes:
+      - ./config:/config
+      - ../../backups/download/:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped

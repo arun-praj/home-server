@@ -99,7 +99,7 @@ services:
       # "/host/folder:/photoprism/folder"                # Example
       - ../../backups/media/Pictures/:/photoprism/originals               # Original media files (DO NOT REMOVE)
       # - "/example/family:/photoprism/originals/family" # *Additional* media folders can be mounted like this
-      # - "~/Import:/photoprism/import"                  # *Optional* base folder from which files can be imported to originals
+      - "~/backups/syncthing_backups:/photoprism/import"                  # *Optional* base folder from which files can be imported to originals
       - "./storage:/photoprism/storage"                  # *Writable* storage folder for cache, database, and sidecar files (DO NOT REMOVE)
 
   ## Database Server (recommended)

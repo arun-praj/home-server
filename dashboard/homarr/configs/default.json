@@ -1,0 +1,24 @@
+{
+  "name": "default",
+  "services": [
+    {
+      "id": "766aea3b-bc0a-45d7-9aa7-78278b8ce3a7",
+      "type": "Other",
+      "name": "A",
+      "icon": "/imgs/favicon/favicon.png",
+      "url": "http://192.168.1.111:8080",
+      "openedUrl": "http://192.168.1.111:8080"
+    }
+  ],
+  "settings": {
+    "searchUrl": "https://www.google.com/search?q="
+  },
+  "modules": {
+    "Search Bar": {
+      "enabled": true
+    },
+    "calendar": {
+      "enabled": false
+    }
+  }
+}

@@ -1,0 +1,199 @@
+
+# See https://fontawesome.com/v5/search for icons options
+
+title: "Arun Homeserver"
+subtitle: "Welcome"
+logo: "logo.png"
+
+header: true
+footer: false # html string to show footer
+
+# Optional theme customization
+theme: default
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+
+# Optional message
+#message:
+  #url: https://b4bz.io
+ # style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
+  #title: "Demo !"
+  #icon: "fa fa-grin"
+  #content: "This is a dummy homepage demo. <br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+#links:
+ # - name: "Contribute"
+  #  icon: "fab fa-github"
+   # url: "https://github.com/bastienwirtz/homer"
+    #target: "_blank" # optional html a tag target attribute
+ #- name: "Wiki"
+  #  icon: "fas fa-book"
+   # url: "https://www.wikipedia.org/"
+  # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
+  # see url field and assets/additional-page.yml.dist used in this example:
+  #- name: "another page!"
+  #  icon: "fas fa-file-alt"
+  #  url: "#additional-page" 
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Media"
+    icon: "fas fa-photo-video"
+    items:
+      - name: "JellyFin"
+        logo: "assets/tools/jf.png"
+        subtitle: "Movies library"
+        tag: "Movie"
+        keywords: "self hosted netflix lol"
+        # target: "_blank"
+        tagstyle: "is-success"
+        type: "Emby"
+        url: "http://192.168.1.111:8096"
+      
+      - name: "Photo Prism"
+        logo: "assets/tools/homericons/png/photoprism.png"
+        subtitle: "Photos Library"
+        # target: "_blank"
+        method: "get"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:2342"
+
+      - name: "Outline"
+        logo: "assets/tools/homericons/png/ooutline.png"
+        subtitle: "Creating beautiful documentation."
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:8889"
+
+      - name: "Bookstack"
+        logo: "assets/tools/homericons/png/bookstack.png"
+        subtitle: "Creating beautiful documentation."
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:6875"
+
+      - name: "Radarr"
+        logo: "assets/tools/homericons/png/radarr.png"
+        subtitle: "RSS feed for Movies"
+        # target: "_blank"
+        type: "Radarr"
+        tagstyle: "is-success"
+        apikey: '936d1e4fde984ee0971dc76e4729c6d6'
+        url: "http://192.168.1.111:7878"
+
+  - name: "Services"
+    icon: "fas fa-charging-station"
+    items:
+      - name: "Code"
+        logo: "assets/tools/homericons/png/code.png"
+        #subtitle: "Adblocker and DNS server"
+        tag: "Code Editor"
+        # type: "PiHole"
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:8443"
+
+      - name: "Pi-hole"
+        logo: "assets/tools/homericons/png/pihole.png"
+        #subtitle: "Adblocker and DNS server"
+        tag: "Adblocker"
+        type: "PiHole"
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:9001/admin"
+
+      - name: "qBitTorrent"
+        logo: "assets/tools/homericons/png/qbittorrent.png"
+        subtitle: "Web torrent client"
+        tag: "directory"
+        rateInterval: 1000
+        torrentInterval: 1000
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:8888"
+
+      - name: "http-server"
+        logo: "assets/tools/homericons/png/omnidb.png"
+        subtitle: "Open directory of all my files"
+        tag: "directory"
+        #type: "Emby"
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "http://192.168.1.111:8080"
+
+  - name: "System"
+    icon: "fab fa-pagelines"
+    items:
+      - name: "Portainer"
+        logo: "assets/tools/homericons/png/portainer.png"
+        # subtitle: "Maintenance and management of Docker’s containers"
+        tag: "docker portainer"
+        type: "Portainer"
+        # target: "_blank"
+        url: "http://192.168.1.111:9999"
+        apikey: "ptr_AhabXuxsKdYBXAgJg0JF/N/uG5wKyJ+F8rtdwAH00qI="
+        tagstyle: "is-success"
+        environments:
+          - "local"
+
+      - name: "Sonarr"
+        logo: "assets/tools/homericons/png/sonarr.png"
+        subtitle: "Monitor rss feed of shows"
+        tag: "sonarr"
+        type: "Sonarr"
+        # target: "_blank"
+        tagstyle: "is-success"
+        apikey: "54b36391ca6549a4997bb77880b5a8f2"
+        url: "http://192.168.1.111:8989"
+
+      - name: "Jackett"
+        logo: "assets/tools/homericons/png/jackett.png"
+        subtitle: "Indexer of popular torrent sites"
+        tag: "Jackett"
+        # type: "Jackett"
+        # target: "_blank"
+        tagstyle: "is-success"
+        apikey: "4picizgn3wwi9t5fd4q2fumyueyifwlo"
+        url: "http://192.168.1.111:9117"
+
+  - name: "My sites"
+    icon: "fab fa-pagelines"
+    items:
+      - name: "Portfolio"
+        logo: "assets/tools/portfolio.png"
+        subtitle: "My portfolio website"
+        tag: "portfolio"
+        type: Ping
+        # target: "_blank"
+        tagstyle: "is-success"
+        url: "https://arunprajapati.com.np"
+

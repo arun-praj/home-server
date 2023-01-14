@@ -1,0 +1,25 @@
+version: "2.1"
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: syncthing 
+    environment:
+      - TZ=Asia/Kathmandu
+      - PUID=0
+      - PGID=0
+    volumes:
+      - ./config:/config
+      - ../../../backups/syncthing_backups:/config/shared
+      # - /path/to/data2:/data2
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped
+    labels:
+      - homepage.group=Network Utility
+      - homepage.name=Syncthing
+      - homepage.href=https://192.168.1.111:8384
+      - homepage.description=Sync data with server

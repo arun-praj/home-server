@@ -1,0 +1,90 @@
+version: "3"
+services:
+  wk-redis:
+    image: redis:latest
+    restart: always
+    networks:
+      - outlinewiki
+  wk-postgres:
+    image: postgres:${POSTGRES_VERSION}
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: outline
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - outlinewiki
+  wk-minio:
+    image: minio/minio:RELEASE.2022-11-17T23-20-09Z
+    volumes:
+      - ./data/minio_root:/minio_root:z
+      - ./data/certs:/root/.minio/certs:z
+    command: "minio server /minio_root"
+    env_file:
+      - ./env.minio
+    restart: always
+    networks:
+      - outlinewiki
+  wk-createbuckets:
+    image: minio/mc:RELEASE.2022-11-17T21-20-39Z
+    depends_on:
+      - wk-minio
+    env_file:
+      - ./env.minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc config host add minio http://wk-minio:9000 24cfb35f4ad751f7 1b669b4780ca3fd96b55646c58f0fe81c80836abf931a003cd36222f6be2cb4f) do echo '...waiting...' && sleep 1; done;
+      /usr/bin/mc mb minio/outline-bucket;
+      /usr/bin/mc anonymous set download minio/outline-bucket;
+      exit 0;
+      "
+    networks:
+      - outlinewiki
+  wk-outline:
+    image: outlinewiki/outline:${OUTLINE_VERSION}
+    command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"
+    environment:
+      - DATABASE_URL=postgres://user:pass@wk-postgres:5432/outline
+      - DATABASE_URL_TEST=postgres://user:pass@wk-postgres:5432/outline-test
+      - REDIS_URL=redis://wk-redis:6379
+      - AWS_S3_UPLOAD_BUCKET_NAME=outline-bucket
+    env_file:
+      - ./env.outline
+      - ./env.oidc
+    restart: always
+    depends_on:
+      - wk-postgres
+      - wk-redis
+      - wk-minio
+    networks:
+      - outlinewiki
+  wk-oidc-server:
+    image: vicalloy/oidc-server
+    volumes:
+      - ./config/uc/fixtures:/app/oidc_server/fixtures:z
+      - ./data/uc/db:/app/db:z
+      - ./data/uc/static_root:/app/static_root:z
+    restart: always
+    env_file:
+      - ./env.oidc-server
+    networks:
+      - outlinewiki
+  wk-nginx:
+    image: nginx
+    ports:
+      - ${HTTP_IP}:${HTTP_PORT_IP}:80
+    volumes:
+      - ./config/nginx/:/etc/nginx/conf.d/:ro
+      - ./data/uc/static_root:/uc/static_root:ro
+    restart: always
+    depends_on:
+      - wk-minio
+      - wk-outline
+      - wk-oidc-server
+    networks:
+      - outlinewiki
+networks:
+  outlinewiki:
+    external: ${NETWORKS_EXTERNAL}
